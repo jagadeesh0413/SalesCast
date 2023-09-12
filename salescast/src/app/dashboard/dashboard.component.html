@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="main">
+  <main role="main" class="container mt-5">
+    <div class="container">
+      <div class="text-center mt-5">
+        
+        <h1>Welcome,<p class="text-bold " [innerText]="this.user.displayName" ></p></h1>
+        <mat-card-title-group>
+          <mat-card-title>
+            <!-- <p class="text-bold " [innerText]="'Hi '+this.user.displayName" ></p> -->
+            <!-- <p class="text-bold " [innerText]="'Hi '+this.user.displayName+', your Firebase ID is '+this.user.localId" ></p> -->
+          </mat-card-title>
+            <mat-card-subtitle>
+  
+            </mat-card-subtitle>
+  
+        </mat-card-title-group>
+        <mat-card>
+          <mat-card-content class="glass"><form #myForm="ngForm" enctype="multipart/form-data" (ngSubmit)="onSubmit(myForm)">
+            <div class="form-group">
+              <label for="fileInput">Upload CSV/Excel File:</label>
+              <input type="file" class="form-control-file" id="fileInput" name="fileInput" required accept=".csv,.xlsx,.xls" (change)="onFileSelected($event)">
+            </div>
+            <div class="form-group">
+              <label for="periodicity">Periodicity:</label>
+              <select class="form-control" id="periodicity" name="periodicity" required [(ngModel)]="data.periodicity">
+                <option value="day">Day</option>
+                <option value="week">Week</option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="periods">Number of Periods:</label>
+              <input type="number" class="form-control" min="1" oninput="validity.valid||(value='');" onkeydown="if(event.key==='-') event.preventDefault();" id="periods" name="periods" required [(ngModel)]="data.periods">
+            </div>
+            <button type="submit" class="btn btn-success">Predict</button>
+          </form></mat-card-content>
+        </mat-card>
+        <br><br>
+        <mat-card>
+          <mat-card-content>
+            <img hidden alt="Base64 Encoded Image" id="result">   
+          </mat-card-content>
+        </mat-card>
+        <div class="float">
+          <button type="button" class="btn btn-sm" onClick="window.location.reload();">
+            <i class="fa fa-refresh my-float"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+
